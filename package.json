@@ -1,8 +1,8 @@
 {
-    "name": "versioning-package-template",
+    "name": "laravel-trustup-model-broadcast",
     "version": "1.0.8",
     "main": "index.js",
-    "repository": "git@github.com:henrotaym/versioning-package-template.git",
+    "repository": "git@github.com:deegitalbe/laravel-trustup-model-broadcast.git",
     "author": "Mathieu Henrotay <mathieu.henrotay@gmail.com>",
     "license": "MIT",
     "scripts": {

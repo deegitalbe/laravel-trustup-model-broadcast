@@ -1,9 +1,9 @@
 <?php
-namespace Henrotaym\VersioningPackageTemplate\Tests;
+namespace Deegitalbe\LaravelTrustupModelBroadcast\Tests;
 
-use Henrotaym\VersioningPackageTemplate\Package;
+use Deegitalbe\LaravelTrustupModelBroadcast\Package;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
-use Henrotaym\VersioningPackageTemplate\Providers\VersioningPackageTemplateServiceProvider;
+use Deegitalbe\LaravelTrustupModelBroadcast\Providers\VersioningPackageTemplateServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
 {
