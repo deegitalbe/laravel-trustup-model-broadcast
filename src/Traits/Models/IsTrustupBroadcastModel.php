@@ -1,8 +1,7 @@
 <?php
 namespace Deegitalbe\LaravelTrustupModelBroadcast\Traits\Models;
 
-use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
-use Deegitalbe\LaravelTrustupModelBroadcast\Events\TrustupBroadcastModelChanged;
+use App\Observers\TrustupBroadcastModelObserver;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Deegitalbe\LaravelTrustupModelBroadcast\Facades\Package;
@@ -11,30 +10,8 @@ trait IsTrustupBroadcastModel
 {
     public static function bootIsTrustupBroadcastModel()
 	{
-		static::created(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("created"));
-        static::updated(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("updated"));
-        static::deleted(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("deleted"));
+		static::observe(TrustupBroadcastModelObserver::class);
 	}
-
-    /**
-     * Broadcasting given event.
-     * 
-     * @param string $eventName Laravel model event that should be broadcasted (created, updated, deleted, ...)
-     * @return void
-     */
-    public function sendTrustupModelChangedEvent(string $eventName): void
-    {
-        /** @var TrustupBroadcastModelContract $this */
-        if (!$this->isCompatibleWithTrustupBroadcast()) return;
-
-        TrustupBroadcastModelChanged::dispatch(
-            $this->getTrustupModelBroadcastChannel($eventName),
-            $this->getTrustupModelBroadcastEventName($eventName),
-            $this->getTrustupModelBroadcastEventAttributes($eventName)
-        );
-    }
-
-
 
     /**
      * Getting channel used when broadcasting model events.
@@ -42,7 +19,7 @@ trait IsTrustupBroadcastModel
      * @param string $eventName Laravel model event that should be broadcasted (created, updated, deleted, ...)
      * @return string
      */
-    public function getTrustupModelBroadcastChannel(string $eventName): string
+    public function getTrustupModelBroadcastChannel(): string
     {
         return join($this->getTrustupModelBroadcastChannelSeparator(), [
             "professional",
@@ -65,13 +42,12 @@ trait IsTrustupBroadcastModel
         ]);
     }
 
-
     /**
      * Getting separator used when constructing model event name.
      * 
      * @return string
      */
-    public function getTrustupModelBroadcastEventSeparator(): string
+    protected function getTrustupModelBroadcastEventSeparator(): string
     {
         return ":";
     }
@@ -81,7 +57,7 @@ trait IsTrustupBroadcastModel
      * 
      * @return string
      */
-    public function getTrustupModelBroadcastChannelSeparator(): string
+    protected function getTrustupModelBroadcastChannelSeparator(): string
     {
         return "-";
     }
@@ -91,7 +67,7 @@ trait IsTrustupBroadcastModel
      * 
      * @return string
      */
-    public function getTrustupModelBroadcastAppKey(): string
+    protected function getTrustupModelBroadcastAppKey(): string
     {
         return Package::getConfig("app_key");
     }
@@ -101,7 +77,7 @@ trait IsTrustupBroadcastModel
      * 
      * @return string
      */
-    public function getTrustupModelBroadcastModelKey(): string
+    protected function getTrustupModelBroadcastModelKey(): string
     {
         /** @var Model $this */
         return Str::slug(str_replace("\\", "-", $this->getMorphClass()));
@@ -114,7 +90,7 @@ trait IsTrustupBroadcastModel
      * 
      * @return ?string
      */
-    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
+    protected function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
     {
         return $this->professional_authorization_key;
     }
@@ -124,7 +100,7 @@ trait IsTrustupBroadcastModel
      * 
      * @return bool
      */
-    public function isCompatibleWithTrustupBroadcast(): bool
+    protected function isCompatibleWithTrustupBroadcast(): bool
     {
         return !!$this->getTrustupModelBroadcastProfessionalAuthorizationKey();
     }
