@@ -10,4 +10,34 @@ class Package extends VersionablePackage implements PackageContract
     {
         return "laravel-trustup-model-broadcast";
     }
+
+    /**
+     * Unique app key used for event names.
+     * 
+     * @return string
+     */
+    public function getAppKey(): string
+    {
+        return $this->getConfig("app_key");
+    }
+
+    /**
+     * Separator used for channel names.
+     * 
+     * @return string
+     */
+    public function getBroadcastChannelSeparator(): string
+    {
+        return $this->getConfig("broadcast.channel_separator");
+    }
+
+    /**
+     * Separator used for event names.
+     * 
+     * @return string
+     */
+    public function getBroadcastEventSeparator(): string
+    {
+        return $this->getConfig("broadcast.event_separator");
+    }
 }

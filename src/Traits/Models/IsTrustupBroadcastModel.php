@@ -1,10 +1,10 @@
 <?php
 namespace Deegitalbe\LaravelTrustupModelBroadcast\Traits\Models;
 
-use App\Observers\TrustupBroadcastModelObserver;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Deegitalbe\LaravelTrustupModelBroadcast\Facades\Package;
+use Deegitalbe\LaravelTrustupModelBroadcast\Observers\TrustupBroadcastModelObserver;
 
 trait IsTrustupBroadcastModel
 {
@@ -19,9 +19,9 @@ trait IsTrustupBroadcastModel
      * @param string $eventName Laravel model event that should be broadcasted (created, updated, deleted, ...)
      * @return string
      */
-    public function getTrustupModelBroadcastChannel(): string
+    public function getTrustupModelBroadcastChannel(string $eventName): string
     {
-        return join($this->getTrustupModelBroadcastChannelSeparator(), [
+        return join(Package::getBroadcastChannelSeparator(), [
             "professional",
             $this->getTrustupModelBroadcastProfessionalAuthorizationKey()
         ]);
@@ -35,41 +35,21 @@ trait IsTrustupBroadcastModel
      */
     public function getTrustupModelBroadcastEventName(string $eventName): string
     {
-        return join($this->getTrustupModelBroadcastEventSeparator(), [
-            $this->getTrustupModelBroadcastAppKey(),
+        return join(Package::getBroadcastEventSeparator(), [
+            Package::getAppKey(),
             $this->getTrustupModelBroadcastModelKey(),
             $eventName
         ]);
     }
 
     /**
-     * Getting separator used when constructing model event name.
+     * Telling if current model is compatible with broadcasting.
      * 
-     * @return string
+     * @return bool
      */
-    protected function getTrustupModelBroadcastEventSeparator(): string
+    public function isCompatibleWithTrustupBroadcast(): bool
     {
-        return ":";
-    }
-
-    /**
-     * Getting separator used when constructing broadcasting channel.
-     * 
-     * @return string
-     */
-    protected function getTrustupModelBroadcastChannelSeparator(): string
-    {
-        return "-";
-    }
-
-    /**
-     * Getting app prefix used when broadcasting model events.
-     * 
-     * @return string
-     */
-    protected function getTrustupModelBroadcastAppKey(): string
-    {
-        return Package::getConfig("app_key");
+        return !!$this->getTrustupModelBroadcastProfessionalAuthorizationKey();
     }
 
     /**
@@ -93,15 +73,5 @@ trait IsTrustupBroadcastModel
     protected function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
     {
         return $this->professional_authorization_key;
-    }
-
-    /**
-     * Telling if current model is compatible with broadcasting.
-     * 
-     * @return bool
-     */
-    protected function isCompatibleWithTrustupBroadcast(): bool
-    {
-        return !!$this->getTrustupModelBroadcastProfessionalAuthorizationKey();
     }
 }

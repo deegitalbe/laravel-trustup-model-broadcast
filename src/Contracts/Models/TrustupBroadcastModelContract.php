@@ -21,7 +21,7 @@ interface TrustupBroadcastModelContract
 
     /**
      * Getting attributes sent along when broadcasing events.
-     
+     * 
      * @param string $eventName Laravel model event that should be broadcasted (created, updated, deleted, ...)
      * @return array<string, mixed>
      */

@@ -1,6 +1,6 @@
 <?php
  
-namespace App\Observers;
+namespace Deegitalbe\LaravelTrustupModelBroadcast\Observers;
  
 use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
 use Deegitalbe\LaravelTrustupModelBroadcast\Events\TrustupBroadcastModelChanged;
