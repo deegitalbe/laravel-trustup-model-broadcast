@@ -3,7 +3,7 @@ namespace Deegitalbe\LaravelTrustupModelBroadcast\Tests;
 
 use Deegitalbe\LaravelTrustupModelBroadcast\Package;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
-use Deegitalbe\LaravelTrustupModelBroadcast\Providers\VersioningPackageTemplateServiceProvider;
+use Deegitalbe\LaravelTrustupModelBroadcast\Providers\LaravelTrustupModelBroadcastServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
 {
@@ -15,7 +15,7 @@ class TestCase extends VersionablePackageTestCase
     public function getServiceProviders(): array
     {
         return [
-            VersioningPackageTemplateServiceProvider::class
+            LaravelTrustupModelBroadcastServiceProvider::class
         ];
     }
 }
