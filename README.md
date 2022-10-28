@@ -1,5 +1,7 @@
 # laravel-trustup-model-broadcast
 
+This package is used to dispatch configured models ***created, updated or deleted*** events to our websocket microservice.
+
 ## Installation
 
 Make sure you configured [websocket package](https://github.com/deegitalbe/laravel-trustup-io-websocket#env-configuration) first!
@@ -43,7 +45,7 @@ class YourModel extends Model implements TrustupBroadcastModelContract
 }
 ```
 
-Keep in mind your ***event won't broadcast if your model is unable to provide professional authorization key***.
+Keep in mind your event ***won't broadcast*** if your model is unable to provide ***professional authorization key***.
 
 ### Customization
 
