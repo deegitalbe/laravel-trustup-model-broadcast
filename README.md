@@ -4,7 +4,11 @@ This package is used to dispatch configured models ***created, updated or delete
 
 ## Installation
 
-Make sure you configured [websocket package](https://github.com/deegitalbe/laravel-trustup-io-websocket#env-configuration) first!
+### Configure websocket package
+
+Make sure you configured [websocket package](https://github.com/deegitalbe/laravel-trustup-io-websocket#env-configuration) first
+
+### Install package using composer
 
 ```shell
 composer require deegitalbe/laravel-trustup-model-broadcast
