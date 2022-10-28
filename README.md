@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 use Deegitalbe\LaravelTrustupModelBroadcast\Traits\Models\IsTrustupBroadcastModel;
 use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
 
-class Task extends Model implements TrustupBroadcastModelContract
+class YourModel extends Model implements TrustupBroadcastModelContract
 {
     use IsTrustupBroadcastModel;
 
@@ -43,7 +43,7 @@ class Task extends Model implements TrustupBroadcastModelContract
 }
 ```
 
-Keep in mind your event won't be broadcast if trait method `getTrustupModelBroadcastProfessionalAuthorizationKey()` returns `null`.
+Keep in mind your ***event won't broadcast if your model is unable to provide professional authorization key***.
 
 ### Customization
 
@@ -61,7 +61,7 @@ By default this package use model attribute `professional_authorization_key`. To
      */
     public function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
     {
-        return "your-value"
+        return "your-value";
     }
 ```
 
