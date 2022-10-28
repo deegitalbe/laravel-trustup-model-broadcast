@@ -67,7 +67,16 @@ interface TrustupBroadcastModelContract
     /**
      * Getting model key used when broadcasting model events.
      * 
-     * @return string
+     * By default if null, event would not broadcast.
+     * 
+     * @return ?string
      */
     public function getTrustupModelBroadcastProfessionalAuthorizationKey(): string;
+
+    /**
+     * Telling if current model is compatible with broadcasting.
+     * 
+     * @return bool
+     */
+    public function isCompatibleWithTrustupBroadcast(): bool;
 }

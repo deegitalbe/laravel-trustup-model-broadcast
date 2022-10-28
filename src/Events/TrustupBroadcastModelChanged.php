@@ -6,7 +6,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
  
 class TrustupBroadcastModelChanged implements ShouldBroadcast
 {
@@ -69,5 +68,15 @@ class TrustupBroadcastModelChanged implements ShouldBroadcast
     public function broadcastAs()
     {
         return $this->eventName;
+    }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return $this->eventAttributes;
     }
 }

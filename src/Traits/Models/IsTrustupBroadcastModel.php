@@ -25,6 +25,7 @@ trait IsTrustupBroadcastModel
     public function sendTrustupModelChangedEvent(string $eventName): void
     {
         /** @var TrustupBroadcastModelContract $this */
+        if (!$this->isCompatibleWithTrustupBroadcast()) return;
 
         TrustupBroadcastModelChanged::dispatch(
             $this->getTrustupModelBroadcastChannel($eventName),
@@ -109,10 +110,22 @@ trait IsTrustupBroadcastModel
     /**
      * Getting model key used when broadcasting model events.
      * 
-     * @return string
+     * By default if null, event would not broadcast.
+     * 
+     * @return ?string
      */
-    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): string
+    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
     {
         return $this->professional_authorization_key;
+    }
+
+    /**
+     * Telling if current model is compatible with broadcasting.
+     * 
+     * @return bool
+     */
+    public function isCompatibleWithTrustupBroadcast(): bool
+    {
+        return !!$this->getTrustupModelBroadcastProfessionalAuthorizationKey();
     }
 }
