@@ -71,7 +71,7 @@ interface TrustupBroadcastModelContract
      * 
      * @return ?string
      */
-    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): string;
+    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string;
 
     /**
      * Telling if current model is compatible with broadcasting.
