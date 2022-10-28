@@ -1,4 +1,67 @@
 # laravel-trustup-model-broadcast
 
+## Installation
+
+Make sure you configured [websocket package](https://github.com/deegitalbe/laravel-trustup-io-websocket#env-configuration) first!
+
+```shell
+composer require deegitalbe/laravel-trustup-model-broadcast
+```
+
+### .env configuration
+
+Add these information to your `.env` file.
+```dotenv
 TRUSTUP_MODEL_BROADCAST_APP_KEY=
-TRUSTUP_MODEL_BROADCAST_PUSHER_APP_SECRET=
+```
+
+## Usage
+
+### Configure your model
+
+```php
+use Illuminate\Database\Eloquent\Model;
+use Deegitalbe\LaravelTrustupModelBroadcast\Traits\Models\IsTrustupBroadcastModel;
+use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
+
+class Task extends Model implements TrustupBroadcastModelContract
+{
+    use IsTrustupBroadcastModel;
+
+    /**
+     * Getting attributes sent along when broadcasing events.
+     
+     * @param string $eventName Laravel model event that should be broadcasted (created, updated, deleted, ...)
+     * @return array<string, mixed>
+     */
+    public function getTrustupModelBroadcastEventAttributes(string $eventName): array
+    {
+        return [
+            // Your attributes ...
+        ];
+    }
+}
+```
+
+Keep in mind your event won't be broadcast if trait method `getTrustupModelBroadcastProfessionalAuthorizationKey()` returns `null`.
+
+### Customization
+
+#### Professional authorization key
+
+By default this package use model attribute `professional_authorization_key`. To customize this behavior, just override trait method.
+
+```php
+    /**
+     * Getting model key used when broadcasting model events.
+     * 
+     * By default if null, event would not broadcast.
+     * 
+     * @return ?string
+     */
+    public function getTrustupModelBroadcastProfessionalAuthorizationKey(): ?string
+    {
+        return "your-value"
+    }
+```
+
