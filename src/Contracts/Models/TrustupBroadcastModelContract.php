@@ -1,7 +1,7 @@
 <?php
 namespace Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models;
 
-interface IsTrustupBroadcastModelContract
+interface TrustupBroadcastModelContract
 {
     /**
      * Broadcasting given event.

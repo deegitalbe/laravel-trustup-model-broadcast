@@ -6,7 +6,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\IsTrustupBroadcastModelContract;
+use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
  
 class TrustupBroadcastModelChanged implements ShouldBroadcast
 {

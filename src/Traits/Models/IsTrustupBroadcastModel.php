@@ -1,7 +1,7 @@
 <?php
 namespace Deegitalbe\LaravelTrustupModelBroadcast\Traits\Models;
 
-use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\IsTrustupBroadcastModelContract;
+use Deegitalbe\LaravelTrustupModelBroadcast\Contracts\Models\TrustupBroadcastModelContract;
 use Deegitalbe\LaravelTrustupModelBroadcast\Events\TrustupBroadcastModelChanged;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -11,9 +11,9 @@ trait IsTrustupBroadcastModel
 {
     public static function bootIsTrustupBroadcastModel()
 	{
-		static::created(fn (IsTrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("created"));
-        static::updated(fn (IsTrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("updated"));
-        static::deleted(fn (IsTrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("deleted"));
+		static::created(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("created"));
+        static::updated(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("updated"));
+        static::deleted(fn (TrustupBroadcastModelContract $model) => $model->sendTrustupModelChangedEvent("deleted"));
 	}
 
     /**
@@ -24,7 +24,7 @@ trait IsTrustupBroadcastModel
      */
     public function sendTrustupModelChangedEvent(string $eventName): void
     {
-        /** @var IsTrustupBroadcastModelContract $this */
+        /** @var TrustupBroadcastModelContract $this */
 
         TrustupBroadcastModelChanged::dispatch(
             $this->getTrustupModelBroadcastChannel($eventName),
